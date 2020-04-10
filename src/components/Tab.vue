@@ -8,19 +8,21 @@
                         :to="data.path"
                         tag="li"
                         active-class="active"
-                    > <i class="iconfont" :class="data.icon"></i> <p>{{data.title}}</p></router-link>
-                   
+                        exact
+                    > <i class="iconfont" :class="data.icon"></i> <p>{{data.title}}</p></router-link>         
+               
             </ul>
         </nav>
-
      
     </div>
 </template>
 
 <script>
+
 export default {
     data(){
         return{
+            isShow:1,
             tabList:[
                 {id:1,title:"首页",path:"/",icon:"icon-smile"},
                 {id:2,title:"分类",path:"/classify",icon:"icon-viewgallery"},
@@ -28,7 +30,12 @@ export default {
                 {id:4,title:"我的",path:"/center",icon:"icon-account"},
             ]
         }
-    }
+    },
+    methods: {
+      switchRouter(path){
+          this.$router.push(path)
+      }  
+    },
 }
 </script>
 
