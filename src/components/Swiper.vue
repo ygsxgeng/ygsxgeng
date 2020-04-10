@@ -7,7 +7,7 @@
         <div class="swiper-pagination"></div>
 
 </div>
-</template>
+</template> 
 
 <script>
 //引入css样式 

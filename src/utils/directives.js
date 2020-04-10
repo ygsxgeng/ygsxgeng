@@ -7,7 +7,7 @@ Vue.directive("swiper",{
             new Swiper("."+binding.value.swipe,{
                 ...binding.value.free,
                 loop:true,
-                
+                 
             })
         }
     }
