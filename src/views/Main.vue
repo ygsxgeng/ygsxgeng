@@ -3,7 +3,7 @@
         <!-- 搜索框 -->
         <div class="header">
            <div class="left" @click="goCity">
-               城市
+                 {{city.name}}
            </div>
            <div class="right">
                 <van-search
@@ -64,6 +64,7 @@ import {instance,instance2} from "@/utils/http"
 import Swiper from "@/components/Swiper"
 import axios from "axios";
 import Vue from 'vue';
+import{mapState,mapActions} from "vuex"
 /* 搜索 */
 import { Search } from 'vant';
 Vue.use(Search);
@@ -73,6 +74,10 @@ Vue.use(Grid);
 Vue.use(GridItem);
 
 export default {
+    name:"index",
+    // computed: {
+    //   ...mapState("home",["ctiy"]),
+    // },
     components:{
         Swiper
     },
@@ -91,6 +96,9 @@ export default {
         goCity(){
             this.$router.push("/city")
         }
+    },
+    computed: {
+        ...mapState("city",["city"])
     },
     created(){
         axios({
@@ -129,6 +137,7 @@ export default {
             justify-content: center;
             align-items: center;
             background-color: rgb(79, 192, 141);
+            color:#fff
         };
         .right {
             height: 0.4rem;
