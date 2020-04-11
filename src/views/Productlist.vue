@@ -18,15 +18,13 @@
                 </van-card>
             </li>
         </ul>
-        
-
     </div>
 </template>
 <script>
 import Vue from 'vue';
 import { instance } from "@/utils/http"
-import { Card,tag,Icon } from 'vant';
-Vue.use(Card).use(Icon);
+import { Card,tag,Icon,PullRefresh,List,cell } from 'vant';
+Vue.use(Card).use(Icon).use(PullRefresh).use(List).use(cell);
 export default {
     data() {
         return {

@@ -1,7 +1,13 @@
 <template>
     <div class="detail"
         v-if="detail"
-    >
+    >   
+        <van-icon 
+            class="back" 
+            name="arrow-left" 
+            size="35"
+            @click="back()"
+        />
         <van-swipe 
             class="my-swipe" 
             :autoplay="3000" 
@@ -29,7 +35,7 @@
                 </div>
             </div>
             <div class="pr">
-                规格：
+                规格：<van-button class="btn" plain type="primary">{{detail.Spec}}</van-button>
             </div>
     </div>
 </template>
@@ -48,7 +54,9 @@ export default {
     },
     props:["id"],
     methods:{
-
+        back(){
+            this.$router.back()
+        }
     },
     created(){
         instance.post("/api/commodityapi/Commodity/GetCommodityInfo?appName=3000025",{
@@ -76,6 +84,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.back{
+    background: transparent;
+    position:fixed;
+    z-index:11;
+    top: 0.1rem;
+    left: 0.15rem;
+}
 .detail{
     background: #f4f4f4;
 }
@@ -125,5 +140,12 @@ export default {
 }
 .pr{
     background: #fff;
+    padding: .17rem .20rem;;
+    .btn{
+        border-radius: 0.17rem 0.17rem 0.17rem 0.17rem;
+        height: 0.34rem;
+        width: 0.89rem;
+        line-height: 0.34rem;
+    }
 }
 </style>
