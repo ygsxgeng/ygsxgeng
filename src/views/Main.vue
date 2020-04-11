@@ -1,13 +1,12 @@
 <template>
     <div class="main">
         <!-- 搜索框 -->
-        <div class="header">
+        <div class="header clear">
            <div class="left" @click="goCity">
-               城市
+                 {{city.name}}
            </div>
            <div class="right">
-                <van-search
-                  
+                <van-search                
                     v-model="searchval"
                     shape="round"
                     background="#4fc08d"
@@ -107,7 +106,7 @@
                             >
                             <img :src="dd.pictureUrl" alt="">
                             <p>{{dd.commodityName}}</p>
-                            <h4>{{dd.commodityPrice}}</h4>
+                            <h4>{{dd.commodityPrice}}元</h4>
                         </div>
                     </Swiper>
                 </div>
@@ -124,6 +123,7 @@
 import Swiper from "@/components/Swiper"
 import axios from "axios";
 import Vue from 'vue';
+import{mapState,mapActions} from "vuex"
 /* 搜索 */
 import { Search } from 'vant';
 Vue.use(Search);
@@ -135,6 +135,10 @@ Vue.use(GridItem);
 import BetterScroll from "better-scroll"
 
 export default {
+    name:"index",
+    // computed: {
+    //   ...mapState("home",["ctiy"]),
+    // },
     components:{
         Swiper
     },
@@ -157,6 +161,9 @@ export default {
         goCity(){
             this.$router.push("/city")
         }
+    },
+    computed: {
+        ...mapState("city",["city"])
     },
     created(){
        
@@ -222,6 +229,7 @@ export default {
             justify-content: center;
             align-items: center;
             background-color: rgb(79, 192, 141);
+            color:#fff
         };
         .right {
             height: 0.4rem;
@@ -263,6 +271,16 @@ export default {
             line-height: 0.4rem;
             padding-left: 0.15rem;
             overflow: hidden;
+        }
+    }
+     .bannertwo{
+        p{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        h4{
+            color: red;
         }
     }
 </style>

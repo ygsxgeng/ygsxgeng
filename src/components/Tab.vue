@@ -1,7 +1,7 @@
 <template>
     <div class="tab">
         <nav>
-            <ul>
+            <ul v-if="isTab">
                     <router-link
                         v-for="data in tabList"
                         :key="data.id"
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 
 export default {
     data(){
@@ -36,6 +37,9 @@ export default {
           this.$router.push(path)
       }  
     },
+    computed:{
+        ...mapState("tab",["isTab"])
+    }
 }
 </script>
 
@@ -50,6 +54,7 @@ export default {
         left: 0;
         bottom: 0;
         display: flex;
+        background: #fff;
         li{
             flex-direction: column;
             flex: 1;
