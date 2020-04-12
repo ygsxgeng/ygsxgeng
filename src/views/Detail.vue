@@ -35,27 +35,49 @@
                 </div>
             </div>
             <div class="pr">
-                规格：<van-button class="btn" plain type="primary">{{detail.Spec}}</van-button>
+                <div class="pr-t">
+                    规格：<van-button class="btn" plain type="primary">{{detail.Spec}}</van-button>
+                </div>
+            </div>
+            <div class="pr-b clear">
+                <P class="fl">数量：</P> <van-stepper class="fl" v-model="value" />
+            </div>
+            <div class="address clear">
+                <p class="fl">送至 </p><p class="ino fl"> <van-icon name="location"  color="#01B27A"  />{{detail.ShippingAddress}}</p>
+                <p class="infor"><span>有货</span>{{detail.DeliveryTips}}</p>
+            </div>
+            <div class="tab">
+                <ul class="tab-b">
+                    <li @click="tomian('/')"><p>首页</p><van-icon name="shop-o" size="20" /></li>
+                    <li @click="tomian('/shopping')"><p>购物车</p><van-icon name="shopping-cart-o"  size="20"/></li>
+                    <li>加入购物车</li>
+                </ul>
             </div>
     </div>
 </template>
 
 <script>
 import Vue from 'vue';
-import { Swipe, SwipeItem,Icon,Button } from 'vant';
+import {mapMutations} from "vuex"
+import { Swipe, SwipeItem,Icon,Button,Stepper } from 'vant';
 Vue.use(Swipe);
-Vue.use(SwipeItem).use(Icon).use(Button);
+Vue.use(SwipeItem).use(Icon).use(Button).use(Stepper);
 import { instance } from "@/utils/http"
 export default {
     data(){
         return{
-            detail:null
+            detail:null,
+            value:1
         }
     },
     props:["id"],
     methods:{
+        ...mapMutations("tab",["hide","show"]),
         back(){
             this.$router.back()
+        },
+        tomian(path){
+            this.$router.push(path)
         }
     },
     created(){
@@ -77,8 +99,15 @@ export default {
                 }
         }).then(res=>{
                 this.detail = res.data.Data.CommodityInfo
-                console.log(this.detail)
             })
+    },
+    mounted(){
+        
+        this.hide()
+    },
+    destroyed(){
+
+        this.show()
     }
 }
 </script>
@@ -136,11 +165,29 @@ export default {
     .info-b{
         padding: 0 0.16rem;
         line-height: 0.5rem;
+        color: #aaaaaa
     }
 }
 .pr{
+    position: relative;
+    color: #999999;
+    >::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: #f4f4f4;
+        transform: scaleY(0.5);
+    .pr-t{
+        color: #999999;
+        
+    }
+    }
+    
     background: #fff;
-    padding: .17rem .20rem;;
+    padding: .17rem .20rem;
     .btn{
         border-radius: 0.17rem 0.17rem 0.17rem 0.17rem;
         height: 0.34rem;
@@ -148,4 +195,69 @@ export default {
         line-height: 0.34rem;
     }
 }
+    .pr-b{
+        color: #999999;
+        background: #fff;
+        padding: .17rem .20rem;
+        margin-bottom: 0.09rem;
+    }
+    .address{
+        padding: 0.13rem 0.16rem;
+        background: #fff;
+        .ino{
+            padding: 0 0 .12rem .12rem;
+        }
+        .infor{
+            clear: both;
+            span{
+                color: #01B27A;
+                padding-right: .06rem;
+            }
+        }
+        margin-bottom: 0.09rem;
+    }
+    .tab{
+        background: #FFF;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.48rem;
+    }
+    .tab-b{
+    text-align: center;
+    display: flex;
+    z-index: 13;
+    width: 100%;
+    padding-left:0.096rem;
+    :nth-child(1){
+        width: 25%;
+        display: flex;
+        flex-direction:column-reverse;
+        Justify-content:center;
+        align-items:center;
+        >p{
+            width: 0.28rem;
+            font-size: 0.09rem;
+            
+        }
+    }
+    :nth-child(2){
+        width: 25%;
+        display: flex;
+        flex-direction:column-reverse;
+        Justify-content:center;
+        align-items:center;
+        >p{
+            width: 0.40rem;
+            font-size: 0.09rem;
+        }
+    }
+    :nth-child(3){
+        width: 50%;
+        color: #FFF;
+        line-height: 0.48rem;
+        background: red;
+    }
+    }
 </style>

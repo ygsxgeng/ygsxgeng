@@ -1,38 +1,86 @@
 <template>
-    <div class="productlist">
-        <ul>
-            <li 
-                v-for="item in productlist"
-                :key="item.CommodityId"
-                tag="li"
-            >       
-            <van-icon class="in" name="plus" />
-                <van-card
-                    @click="hanldPage(item.CommodityCode)"
-                    :price="item.OriginalPrice"
-                    :desc="item.Spec"
-                    :title="item.CommodityName"
-                    :thumb="item.SmallPic"
-                    class="list"
-                >
-                </van-card>
-            </li>
-        </ul>
+    <div class="productlist" >
+        <van-tabs v-model="active" sticky>
+            <van-tab title="销量" name="4">
+                <ul>
+                    <li 
+                        v-for="item in productlist"
+                        :key="item.CommodityId"
+                        tag="li"
+                    >       
+                    <van-icon class="in" name="plus" />
+                        <van-card
+                            @click="hanldPage(item.CommodityCode)"
+                            :price="item.OriginalPrice"
+                            :desc="item.Spec"
+                            :title="item.CommodityName"
+                            :thumb="item.SmallPic"
+                            class="list"
+                        >
+                        </van-card>
+                    </li>
+                </ul>
+            </van-tab>
+            <van-tab title="新品" name="5">
+                <ul>
+                    <li 
+                        v-for="item in productlist"
+                        :key="item.CommodityId"
+                        tag="li"
+                    >       
+                    <van-icon class="in" name="plus" />
+                        <van-card
+                            @click="hanldPage(item.CommodityCode)"
+                            :price="item.OriginalPrice"
+                            :desc="item.Spec"
+                            :title="item.CommodityName"
+                            :thumb="item.SmallPic"
+                            class="list"
+                        >
+                        </van-card>
+                    </li>
+                </ul>
+            </van-tab>
+            <van-tab title="价格" name="2">
+                <ul>
+                    <li 
+                        v-for="item in productlist"
+                        :key="item.CommodityId"
+                        tag="li"
+                    >       
+                    <van-icon class="in" name="plus" />
+                        <van-card
+                            @click="hanldPage(item.CommodityCode)"
+                            :price="item.OriginalPrice"
+                            :desc="item.Spec"
+                            :title="item.CommodityName"
+                            :thumb="item.SmallPic"
+                            class="list"
+                        >
+                        </van-card>
+                    </li>
+                </ul>
+            </van-tab>
+        </van-tabs>
+        
     </div>
 </template>
 <script>
 import Vue from 'vue';
+import {mapMutations} from "vuex"
 import { instance } from "@/utils/http"
-import { Card,tag,Icon,PullRefresh,List,cell } from 'vant';
-Vue.use(Card).use(Icon).use(PullRefresh).use(List).use(cell);
+import { Card,tag,Icon,PullRefresh,List,cell,Tab, Tabs } from 'vant';
+Vue.use(Card).use(Icon).use(PullRefresh).use(List).use(cell).use(Tab).use(Tabs);
 export default {
     data() {
         return {
-            productlist:[]
+            productlist:[],
+            active: 0
         }
     },
     props:["id"],
     methods:{
+        ...mapMutations("tab",["hide","show"]),
         hanldPage(data){
         this.$router.push({
                     name:"detail",
@@ -41,6 +89,7 @@ export default {
                     }
                 })
         }
+        
     },
     created(){
         instance.post("/api/commodityapi/Commodity/GetSearchList?appName=3000025",{
@@ -67,6 +116,11 @@ export default {
     },
     mounted(){
         
+        this.hide()
+    },
+    destroyed(){
+
+        this.show()
     }
     
 }
@@ -74,6 +128,20 @@ export default {
 
 
 <style lang="scss" scoped>
+    .active{
+        border-bottom: 0.02rem solid #11B57C
+    }
+    .top{
+        display: flex;
+        flex: 1;
+        position: static;
+        z-index: 12;
+        li{
+            width: 33.3%;
+            text-align: center;
+            padding: 0.1rem;
+        }
+    }
     .list{
         background:#fff;
         img{
