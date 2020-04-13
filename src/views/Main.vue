@@ -61,7 +61,7 @@
 
                 <div class="letter">
                     <div class="left">
-                        <i>易果快报</i>
+                        易果快报
                     </div>
                     <div class="right">
                         <Swiper cName="lett">

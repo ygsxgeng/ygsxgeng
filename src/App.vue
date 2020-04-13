@@ -8,10 +8,13 @@
 </template>
 
 <script>
+import {mapState} from "vuex"
 import  Tab from "@/components/Tab"
 export default {
   components:{
     Tab,
+  },
+  computed:{
   }
 }
 </script>

@@ -22,7 +22,7 @@
 </template>
 
 <script>
-  import { instance } from "@/utils/http";
+  import { instance1 } from "@/utils/http";
   import city from"@/utils/city"
   import Vue from "vue";
 
@@ -57,7 +57,7 @@
         this.isShow = true;
         this.params = params;
         this.actions = [];
-        instance.post("/api/user/Area/GetDistrictList", {
+        instance1.post("/api/user/Area/GetDistrictList", {
           Head: {
             Token: "",
             LoginToken: "",
@@ -93,7 +93,7 @@
     },
 
     mounted() {
-      instance.post("/api/user/Area/GetCityList", {
+      instance1.post("/api/user/Area/GetCityList", {
         Head: {
           Token: "",
           LoginToken: "",

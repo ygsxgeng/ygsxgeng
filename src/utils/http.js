@@ -1,7 +1,7 @@
 import Vue  from "vue"
 import axios from "axios"
 
-const instance =  axios.create({
+const instance1 =  axios.create({
     baseURL:"https://b2capigateway.yiguo.com",
     timeout:3000,
     headers: {
@@ -9,9 +9,10 @@ const instance =  axios.create({
         "appName": "3000025"
       }
 })
-const instance2 = axios.create({
-    baseURL: '/info',
-  
+const instance =  axios.create({
+    baseURL:"https://b2capigateway.yiguo.com",
+    timeout:6000,
+
 })
 
-export {instance,instance2}
+export {instance,instance1}

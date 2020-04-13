@@ -1,7 +1,7 @@
 <template>
     <div class="tab">
         <nav>
-            <ul v-if="isTab">
+            <ul v-show="isTab">
                     <router-link
                         v-for="data in tabList"
                         :key="data.id"
@@ -10,10 +10,8 @@
                         active-class="active"
                         exact
                     > <i class="iconfont" :class="data.icon"></i> <p>{{data.title}}</p></router-link>         
-               
             </ul>
         </nav>
-     
     </div>
 </template>
 
@@ -44,9 +42,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- .active{
-        color: greenyellow;
- }
+    .active{
+            color: greenyellow;
+    }
     ul{
         height: 50px;
         width: 100%;
